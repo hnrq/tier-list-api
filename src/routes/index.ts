@@ -1,13 +1,12 @@
-import { Hono } from "hono";
+import express from 'express';
 
-import * as productController from "controllers/product.controller";
+import * as productController from '../controllers/product.controller';
 
-const routes = new Hono();
+const routes = express.Router();
 
-routes
-  .get("/", (res) => {
-    return res.json({ message: "Working!" });
-  })
-  .get("/product/:url", productController.getProduct);
+routes.get('/', (req, res) => {
+  res.send('working');
+});
+routes.get('/products', productController.getProducts);
 
 export default routes;

@@ -1,6 +1,17 @@
 {
   "compilerOptions": {
-    "types": ["bun-types", "node"],
-    "baseUrl": "./src"
-  }
+    "target": "ESNext",
+    "lib": ["ESNext"],
+    "module": "commonjs",
+    "strictPropertyInitialization": false,
+    "resolveJsonModule": true,
+    "outDir": "build",
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "types": ["node", "jest"],
+    "strict": true,
+    "noImplicitAny": true,
+    "skipLibCheck": true
+  },
+  "exclude": ["node_modules"]
 }
