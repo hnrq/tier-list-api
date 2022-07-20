@@ -7,7 +7,6 @@
     "test": "jest",
     "test:watch": "jest --watchAll",
     "start": "vercel dev",
-    "build": "tsc",
     "dev": "nodemon"
   },
   "keywords": [],
