@@ -6,6 +6,7 @@
   "scripts": {
     "test": "jest",
     "test:watch": "jest --watchAll",
+    "start": "vercel dev",
     "build": "tsc",
     "dev": "nodemon"
   },
@@ -20,6 +21,7 @@
     "@types/express": "^4.17.13",
     "@types/jest": "^28.1.6",
     "@types/jsdom": "^16.2.14",
+    "@types/next": "^9.0.0",
     "@types/node": "^18.0.4",
     "bun-types": "^0.1.4",
     "eslint": "^8.20.0",
@@ -30,7 +32,8 @@
     "prettier": "^2.7.1",
     "ts-jest": "^28.0.7",
     "ts-node": "^10.9.1",
-    "typescript": "^4.7.4"
+    "typescript": "^4.7.4",
+    "vercel": "^27.1.5"
   },
   "jest": {
     "preset": "ts-jest",

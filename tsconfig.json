@@ -3,7 +3,7 @@
     "target": "ESNext",
     "lib": ["ESNext"],
     "module": "commonjs",
-    "rootDir": "./src",
+    "rootDir": "api",
     "strictPropertyInitialization": false,
     "resolveJsonModule": true,
     "outDir": "build",
