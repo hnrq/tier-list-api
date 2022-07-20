@@ -1,13 +1,9 @@
-import { Request, Response } from 'express';
+import { VercelRequest, VercelResponse } from '@vercel/node';
 import * as productControllers from '../controllers/product.controller';
 
-interface GetProductsParams {
-  url: [];
-}
-
 export default async (
-  { query: { url } }: Request<any, any, any, GetProductsParams>,
-  response: Response
+  { query: { url } }: VercelRequest,
+  response: VercelResponse
 ) => {
   try {
     const urls: string[] = typeof url === 'string' ? [url] : url;

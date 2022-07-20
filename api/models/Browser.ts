@@ -1,4 +1,5 @@
-import * as puppeteer from 'puppeteer';
+import chromium from 'chrome-aws-lambda';
+import puppeteer from 'puppeteer-core';
 
 class Browser implements IBrowser {
   private static blockedRequestTypes = ['font', 'image', 'stylesheet'];
@@ -87,12 +88,18 @@ class Browser implements IBrowser {
       `Puppeteer browser starting up with slowdown set to: ${slowdown}`
     );
 
-    return await puppeteer.launch({
+    return puppeteer.launch({
       headless: headless,
       devtools: devTools,
       ignoreHTTPSErrors: true,
+      defaultViewport: chromium.defaultViewport,
+      executablePath:
+        process.env.NODE_ENV !== 'development'
+          ? await chromium.executablePath
+          : '/bin/chromium',
       slowMo: slowdown,
       args: [
+        ...chromium.args,
         '--no-sandbox',
         '--disable-setuid-sandbox',
         '--disable-dev-shm-usage',
@@ -100,6 +107,8 @@ class Browser implements IBrowser {
         '--no-first-run',
         '--no-zygote',
         '--disable-gpu',
+        '--hide-scrollbars',
+        '--disable-web-security',
       ],
     });
   }
