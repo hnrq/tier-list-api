@@ -7,7 +7,6 @@
     "test": "jest",
     "test:watch": "jest --watchAll",
     "build": "tsc",
-    "start": "node build/index.js",
     "postinstall": "npm run build",
     "dev": "nodemon"
   },

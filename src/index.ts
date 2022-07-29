@@ -2,10 +2,11 @@ import express from 'express';
 
 import routes from './routes';
 
-const PORT = process.env.port || 3000;
+var PORT = Number(process.env.PORT || 80);
+var HOST = process.env.HOST || '0.0.0.0';
 const app = express();
 
 app.use('/api', routes);
-app.listen(PORT, () => {
-  console.log(`Example app listening on port ${PORT}`);
+app.listen(PORT, HOST, () => {
+  console.log(`Listening on port ${PORT}`);
 });
