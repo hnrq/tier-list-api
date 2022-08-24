@@ -1,5 +1,5 @@
 {
-  "name": "products-api",
+  "name": "tier-list-api",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -7,6 +7,7 @@
     "test": "jest",
     "test:watch": "jest --watchAll",
     "build": "tsc",
+    "db:generate": "source ./.env && openapi-typescript  $SUPABASE_URL/rest/v1/?apikey=$SUPABASE_KEY  --output src/types/supabase.ts",
     "postinstall": "npm run build",
     "dev": "nodemon"
   },
@@ -14,6 +15,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@supabase/supabase-js": "^1.35.6",
+    "dotenv": "^16.0.1",
     "express": "^4.18.1",
     "puppeteer": "^15.4.0"
   },
