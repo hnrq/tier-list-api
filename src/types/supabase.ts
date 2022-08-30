@@ -126,12 +126,114 @@ export interface paths {
       };
     };
   };
+  "/rank": {
+    get: {
+      parameters: {
+        query: {
+          id?: parameters["rowFilter.rank.id"];
+          title?: parameters["rowFilter.rank.title"];
+          created_at?: parameters["rowFilter.rank.created_at"];
+          description?: parameters["rowFilter.rank.description"];
+          product_order?: parameters["rowFilter.rank.product_order"];
+          id_tier_list?: parameters["rowFilter.rank.id_tier_list"];
+          /** Filtering Columns */
+          select?: parameters["select"];
+          /** Ordering */
+          order?: parameters["order"];
+          /** Limiting and Pagination */
+          offset?: parameters["offset"];
+          /** Limiting and Pagination */
+          limit?: parameters["limit"];
+        };
+        header: {
+          /** Limiting and Pagination */
+          Range?: parameters["range"];
+          /** Limiting and Pagination */
+          "Range-Unit"?: parameters["rangeUnit"];
+          /** Preference */
+          Prefer?: parameters["preferCount"];
+        };
+      };
+      responses: {
+        /** OK */
+        200: {
+          schema: definitions["rank"][];
+        };
+        /** Partial Content */
+        206: unknown;
+      };
+    };
+    post: {
+      parameters: {
+        body: {
+          /** rank */
+          rank?: definitions["rank"];
+        };
+        query: {
+          /** Filtering Columns */
+          select?: parameters["select"];
+        };
+        header: {
+          /** Preference */
+          Prefer?: parameters["preferReturn"];
+        };
+      };
+      responses: {
+        /** Created */
+        201: unknown;
+      };
+    };
+    delete: {
+      parameters: {
+        query: {
+          id?: parameters["rowFilter.rank.id"];
+          title?: parameters["rowFilter.rank.title"];
+          created_at?: parameters["rowFilter.rank.created_at"];
+          description?: parameters["rowFilter.rank.description"];
+          product_order?: parameters["rowFilter.rank.product_order"];
+          id_tier_list?: parameters["rowFilter.rank.id_tier_list"];
+        };
+        header: {
+          /** Preference */
+          Prefer?: parameters["preferReturn"];
+        };
+      };
+      responses: {
+        /** No Content */
+        204: never;
+      };
+    };
+    patch: {
+      parameters: {
+        query: {
+          id?: parameters["rowFilter.rank.id"];
+          title?: parameters["rowFilter.rank.title"];
+          created_at?: parameters["rowFilter.rank.created_at"];
+          description?: parameters["rowFilter.rank.description"];
+          product_order?: parameters["rowFilter.rank.product_order"];
+          id_tier_list?: parameters["rowFilter.rank.id_tier_list"];
+        };
+        body: {
+          /** rank */
+          rank?: definitions["rank"];
+        };
+        header: {
+          /** Preference */
+          Prefer?: parameters["preferReturn"];
+        };
+      };
+      responses: {
+        /** No Content */
+        204: never;
+      };
+    };
+  };
   "/tier_list_product": {
     get: {
       parameters: {
         query: {
           product_id?: parameters["rowFilter.tier_list_product.product_id"];
-          tier_id?: parameters["rowFilter.tier_list_product.tier_id"];
+          rank_id?: parameters["rowFilter.tier_list_product.rank_id"];
           tier_list_id?: parameters["rowFilter.tier_list_product.tier_list_id"];
           /** Filtering Columns */
           select?: parameters["select"];
@@ -184,7 +286,7 @@ export interface paths {
       parameters: {
         query: {
           product_id?: parameters["rowFilter.tier_list_product.product_id"];
-          tier_id?: parameters["rowFilter.tier_list_product.tier_id"];
+          rank_id?: parameters["rowFilter.tier_list_product.rank_id"];
           tier_list_id?: parameters["rowFilter.tier_list_product.tier_list_id"];
         };
         header: {
@@ -201,114 +303,12 @@ export interface paths {
       parameters: {
         query: {
           product_id?: parameters["rowFilter.tier_list_product.product_id"];
-          tier_id?: parameters["rowFilter.tier_list_product.tier_id"];
+          rank_id?: parameters["rowFilter.tier_list_product.rank_id"];
           tier_list_id?: parameters["rowFilter.tier_list_product.tier_list_id"];
         };
         body: {
           /** tier_list_product */
           tier_list_product?: definitions["tier_list_product"];
-        };
-        header: {
-          /** Preference */
-          Prefer?: parameters["preferReturn"];
-        };
-      };
-      responses: {
-        /** No Content */
-        204: never;
-      };
-    };
-  };
-  "/tier": {
-    get: {
-      parameters: {
-        query: {
-          id?: parameters["rowFilter.tier.id"];
-          title?: parameters["rowFilter.tier.title"];
-          created_at?: parameters["rowFilter.tier.created_at"];
-          description?: parameters["rowFilter.tier.description"];
-          product_order?: parameters["rowFilter.tier.product_order"];
-          tier_list_id?: parameters["rowFilter.tier.tier_list_id"];
-          /** Filtering Columns */
-          select?: parameters["select"];
-          /** Ordering */
-          order?: parameters["order"];
-          /** Limiting and Pagination */
-          offset?: parameters["offset"];
-          /** Limiting and Pagination */
-          limit?: parameters["limit"];
-        };
-        header: {
-          /** Limiting and Pagination */
-          Range?: parameters["range"];
-          /** Limiting and Pagination */
-          "Range-Unit"?: parameters["rangeUnit"];
-          /** Preference */
-          Prefer?: parameters["preferCount"];
-        };
-      };
-      responses: {
-        /** OK */
-        200: {
-          schema: definitions["tier"][];
-        };
-        /** Partial Content */
-        206: unknown;
-      };
-    };
-    post: {
-      parameters: {
-        body: {
-          /** tier */
-          tier?: definitions["tier"];
-        };
-        query: {
-          /** Filtering Columns */
-          select?: parameters["select"];
-        };
-        header: {
-          /** Preference */
-          Prefer?: parameters["preferReturn"];
-        };
-      };
-      responses: {
-        /** Created */
-        201: unknown;
-      };
-    };
-    delete: {
-      parameters: {
-        query: {
-          id?: parameters["rowFilter.tier.id"];
-          title?: parameters["rowFilter.tier.title"];
-          created_at?: parameters["rowFilter.tier.created_at"];
-          description?: parameters["rowFilter.tier.description"];
-          product_order?: parameters["rowFilter.tier.product_order"];
-          tier_list_id?: parameters["rowFilter.tier.tier_list_id"];
-        };
-        header: {
-          /** Preference */
-          Prefer?: parameters["preferReturn"];
-        };
-      };
-      responses: {
-        /** No Content */
-        204: never;
-      };
-    };
-    patch: {
-      parameters: {
-        query: {
-          id?: parameters["rowFilter.tier.id"];
-          title?: parameters["rowFilter.tier.title"];
-          created_at?: parameters["rowFilter.tier.created_at"];
-          description?: parameters["rowFilter.tier.description"];
-          product_order?: parameters["rowFilter.tier.product_order"];
-          tier_list_id?: parameters["rowFilter.tier.tier_list_id"];
-        };
-        body: {
-          /** tier */
-          tier?: definitions["tier"];
         };
         header: {
           /** Preference */
@@ -329,6 +329,7 @@ export interface paths {
           title?: parameters["rowFilter.tier_list.title"];
           tier_order?: parameters["rowFilter.tier_list.tier_order"];
           created_at?: parameters["rowFilter.tier_list.created_at"];
+          description?: parameters["rowFilter.tier_list.description"];
           /** Filtering Columns */
           select?: parameters["select"];
           /** Ordering */
@@ -383,6 +384,7 @@ export interface paths {
           title?: parameters["rowFilter.tier_list.title"];
           tier_order?: parameters["rowFilter.tier_list.tier_order"];
           created_at?: parameters["rowFilter.tier_list.created_at"];
+          description?: parameters["rowFilter.tier_list.description"];
         };
         header: {
           /** Preference */
@@ -401,6 +403,7 @@ export interface paths {
           title?: parameters["rowFilter.tier_list.title"];
           tier_order?: parameters["rowFilter.tier_list.tier_order"];
           created_at?: parameters["rowFilter.tier_list.created_at"];
+          description?: parameters["rowFilter.tier_list.description"];
         };
         body: {
           /** tier_list */
@@ -422,11 +425,11 @@ export interface paths {
 export interface definitions {
   product: {
     /**
-     * Format: bigint
+     * Format: character varying
      * @description Note:
      * This is a Primary Key.<pk/>
      */
-    id: number;
+    id: string;
     /** Format: character varying */
     title: string;
     /** Format: integer */
@@ -434,11 +437,11 @@ export interface definitions {
     /** Format: character varying */
     store: string;
     /** Format: ARRAY */
-    images?: unknown[];
+    images: unknown[];
     /** Format: jsonb */
-    ratings?: unknown;
+    ratings: unknown;
     /** Format: character varying */
-    currency?: string;
+    currency: string;
     /** Format: jsonb */
     original_price: unknown;
     /** Format: jsonb */
@@ -449,29 +452,7 @@ export interface definitions {
      */
     created_at?: string;
   };
-  tier_list_product: {
-    /**
-     * Format: bigint
-     * @description Note:
-     * This is a Primary Key.<pk/>
-     * This is a Foreign Key to `product.id`.<fk table='product' column='id'/>
-     */
-    product_id: number;
-    /**
-     * Format: bigint
-     * @description Note:
-     * This is a Foreign Key to `tier.id`.<fk table='tier' column='id'/>
-     */
-    tier_id?: number;
-    /**
-     * Format: uuid
-     * @description Note:
-     * This is a Primary Key.<pk/>
-     * This is a Foreign Key to `tier_list.id`.<fk table='tier_list' column='id'/>
-     */
-    tier_list_id: string;
-  };
-  tier: {
+  rank: {
     /**
      * Format: bigint
      * @description Note:
@@ -494,7 +475,29 @@ export interface definitions {
      * @description Note:
      * This is a Foreign Key to `tier_list.id`.<fk table='tier_list' column='id'/>
      */
-    tier_list_id?: string;
+    id_tier_list?: string;
+  };
+  tier_list_product: {
+    /**
+     * Format: character varying
+     * @description Note:
+     * This is a Primary Key.<pk/>
+     * This is a Foreign Key to `product.id`.<fk table='product' column='id'/>
+     */
+    product_id: string;
+    /**
+     * Format: bigint
+     * @description Note:
+     * This is a Foreign Key to `rank.id`.<fk table='rank' column='id'/>
+     */
+    rank_id?: number;
+    /**
+     * Format: uuid
+     * @description Note:
+     * This is a Primary Key.<pk/>
+     * This is a Foreign Key to `tier_list.id`.<fk table='tier_list' column='id'/>
+     */
+    tier_list_id: string;
   };
   tier_list: {
     /**
@@ -513,6 +516,8 @@ export interface definitions {
      * @default now()
      */
     created_at?: string;
+    /** Format: character varying */
+    description?: string;
   };
 }
 
@@ -551,7 +556,7 @@ export interface parameters {
   limit: string;
   /** @description product */
   "body.product": definitions["product"];
-  /** Format: bigint */
+  /** Format: character varying */
   "rowFilter.product.id": string;
   /** Format: character varying */
   "rowFilter.product.title": string;
@@ -571,28 +576,28 @@ export interface parameters {
   "rowFilter.product.sale_price": string;
   /** Format: timestamp with time zone */
   "rowFilter.product.created_at": string;
+  /** @description rank */
+  "body.rank": definitions["rank"];
+  /** Format: bigint */
+  "rowFilter.rank.id": string;
+  /** Format: character varying */
+  "rowFilter.rank.title": string;
+  /** Format: timestamp with time zone */
+  "rowFilter.rank.created_at": string;
+  /** Format: character varying */
+  "rowFilter.rank.description": string;
+  /** Format: ARRAY */
+  "rowFilter.rank.product_order": string;
+  /** Format: uuid */
+  "rowFilter.rank.id_tier_list": string;
   /** @description tier_list_product */
   "body.tier_list_product": definitions["tier_list_product"];
-  /** Format: bigint */
+  /** Format: character varying */
   "rowFilter.tier_list_product.product_id": string;
   /** Format: bigint */
-  "rowFilter.tier_list_product.tier_id": string;
+  "rowFilter.tier_list_product.rank_id": string;
   /** Format: uuid */
   "rowFilter.tier_list_product.tier_list_id": string;
-  /** @description tier */
-  "body.tier": definitions["tier"];
-  /** Format: bigint */
-  "rowFilter.tier.id": string;
-  /** Format: character varying */
-  "rowFilter.tier.title": string;
-  /** Format: timestamp with time zone */
-  "rowFilter.tier.created_at": string;
-  /** Format: character varying */
-  "rowFilter.tier.description": string;
-  /** Format: ARRAY */
-  "rowFilter.tier.product_order": string;
-  /** Format: uuid */
-  "rowFilter.tier.tier_list_id": string;
   /** @description tier_list */
   "body.tier_list": definitions["tier_list"];
   /** Format: uuid */
@@ -603,6 +608,8 @@ export interface parameters {
   "rowFilter.tier_list.tier_order": string;
   /** Format: timestamp with time zone */
   "rowFilter.tier_list.created_at": string;
+  /** Format: character varying */
+  "rowFilter.tier_list.description": string;
 }
 
 export interface operations {}
