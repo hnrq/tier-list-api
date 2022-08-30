@@ -1,7 +1,7 @@
 export default interface Product {
   id: string;
   title: string;
-  category_id: string;
+  categoryId: string;
   store: string;
   images: string[];
   ratings: {
@@ -15,11 +15,11 @@ export default interface Product {
     oneStarCount: number;
   };
   currency: string;
-  original_price: {
+  originalPrice: {
     min: number;
     max: number;
   };
-  sale_price: {
+  salePrice?: {
     min: number;
     max: number;
   };
