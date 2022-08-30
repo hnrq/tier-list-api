@@ -1,9 +1,10 @@
-import { Product } from 'puppeteer';
-import type Tier from './Tier';
+import Product from './Product';
+import type Rank from './Rank';
 
 export default interface TierList {
   id: string;
   title: string;
-  tiers: Tier[];
+  description?: string;
+  tiers: Rank[];
   unranked: Product[];
 }

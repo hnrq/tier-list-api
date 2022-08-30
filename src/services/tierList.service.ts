@@ -1,39 +1,38 @@
+import _ from 'lodash';
+
 import Product from '../types/Product';
-import * as aliexpressService from './aliexpress.service';
-import * as productModel from '../models/product.model';
+import * as productService from './product.service';
 import * as tierListModel from '../models/tierList.model';
-import { getDomain, getProductId, isDomainSupported } from '../utils/url';
+import { definitions } from '../types/supabase';
 
-export const getProduct = async (url: URL) => {
-  try {
-    if (!isDomainSupported(url)) throw 'Domain not supported';
+export const getTierList = (id: string) => tierListModel.getTierList(id);
 
-    const id = getProductId(url);
-    let product = await productModel.getProduct(id);
+export const addTierList = (tierList: {
+  title: string;
+  description?: string;
+}) => tierListModel.addTierList(tierList);
 
-    if (product) return product;
-
-    switch (getDomain(url)) {
-      case 'aliexpress.com': {
-        product = aliexpressService.getProduct(id);
-        break;
-      }
-    }
-
-    await productModel.addProduct(product);
-    return product;
-  } catch (error) {
-    throw error;
-  }
-};
+export const deleteTierList = (id: string) => tierListModel.deleteTierList(id);
 
 export const addProductsToTierList = async (
   urls: string[],
   id: string
 ): Promise<Product[]> => {
-  const products = await Promise.all(
-    urls.map((url) => getProduct(new URL(url)))
+  const { products, urlsNotFound } = await productService.getProductsByUrl(
+    urls
   );
+  let addedProducts: Product[] = [];
 
-  return tierListModel.addProductsToTierList(products, id);
+  if (urlsNotFound.length > 0)
+    addedProducts = await productService.addProductsByUrl(urlsNotFound);
+
+  return tierListModel.addProductsToTierList(id, [
+    ...products,
+    ...addedProducts,
+  ]);
 };
+
+export const deleteProductFromTierList = async (
+  id: string,
+  productId: string
+) => tierListModel.deleteProductFromTierList(id, productId);
