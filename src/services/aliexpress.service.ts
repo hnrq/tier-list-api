@@ -1,31 +1,5 @@
-import Browser from '../models/Browser';
-
-export interface Product {
-  id: string;
-  title: string;
-  categoryId: string;
-  store: string;
-  images: string[];
-  ratings: {
-    totalStar: number;
-    averageStar: number;
-    totalStartCount: number;
-    fiveStarCount: number;
-    fourStarCount: number;
-    threeStarCount: number;
-    twoStarCount: number;
-    oneStarCount: number;
-  };
-  currency: string;
-  originalPrice: {
-    min: number;
-    max: number;
-  };
-  salePrice: {
-    min: number;
-    max: number;
-  };
-}
+import Browser from '../models/browser.model';
+import Product from '../types/Product';
 
 const formatProduct = (data: Record<string, any>): Product => ({
   id: data.actionModule.productId,

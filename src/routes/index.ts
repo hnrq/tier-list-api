@@ -1,12 +1,18 @@
 import express from 'express';
 
-import * as productController from '../controllers/product.controller';
+import requireAuth from '../middlewares/requireAuth';
+import productRouter from './product';
+import tierListRouter from './tierList';
 
 const routes = express.Router();
 
-routes.get('/', (req, res) => {
-  res.send('working');
+routes.use(requireAuth);
+routes.get('/', (_req, res) => {
+  res.json({ message: 'working' });
 });
-routes.get('/products', productController.getProducts);
+
+routes.use('/products', productRouter);
+
+routes.use('/tier-lists', tierListRouter);
 
 export default routes;

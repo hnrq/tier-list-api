@@ -1,38 +1,16 @@
-import { getDomain, getProductId, isDomainSupported } from '../utils/url';
-import * as aliexpressService from '../services/aliexpress.service';
+import * as productService from '../services/product.service';
 import { Request, Response } from 'express';
 
-export const getProduct = async (url: URL) => {
-  try {
-    if (!isDomainSupported(url)) throw 'Domain not supported';
+export type GetProductParams = { id: string };
 
-    const productId = getProductId(url);
-    switch (getDomain(url)) {
-      case 'aliexpress.com':
-        return aliexpressService.getProduct(productId);
-    }
-  } catch (error) {
-    throw error;
-  }
-};
-
-interface GetProductsParams {
-  url: [];
-}
-
-export const getProducts = async (
-  { query: { url } }: Request<any, any, any, GetProductsParams>,
+export const getProduct = async (
+  { params: { id } }: Request<GetProductParams, never>,
   response: Response
 ) => {
   try {
-    const urls: string[] = typeof url === 'string' ? [url] : url;
-    if (urls.length === 0) throw 'A URL is required';
-
-    const result = await Promise.all(
-      urls.map((url) => getProduct(new URL(url)))
-    );
-
-    response.json(result);
+    const product = await productService.getProduct(id);
+    if (product === undefined) response.status(404).send('Not found');
+    else response.status(200).json(product);
   } catch (error) {
     console.error(error);
     response.status(400).send({ error });
