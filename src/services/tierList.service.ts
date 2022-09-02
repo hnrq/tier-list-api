@@ -3,7 +3,6 @@ import _ from 'lodash';
 import Product from '../types/Product';
 import * as productService from './product.service';
 import * as tierListModel from '../models/tierList.model';
-import { definitions } from '../types/supabase';
 
 export const getTierList = (id: string) => tierListModel.getTierList(id);
 
@@ -11,6 +10,14 @@ export const addTierList = (tierList: {
   title: string;
   description?: string;
 }) => tierListModel.addTierList(tierList);
+
+export const updateTierList = (
+  id: string,
+  tierList: {
+    title: string;
+    description?: string;
+  }
+) => tierListModel.updateTierList(id, tierList);
 
 export const deleteTierList = (id: string) => tierListModel.deleteTierList(id);
 

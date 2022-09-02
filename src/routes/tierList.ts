@@ -11,9 +11,13 @@ tierListRoutes.post(
   tierListController.addProductsToTierList
 );
 
-tierListRoutes.delete('/:id', tierListController.deleteTierList);
+tierListRoutes.patch(
+  '/:id',
+  bodyParser.json(),
+  tierListController.updateTierList
+);
 
-// tierListRoutes.patch('/:id', tierListController.updateTierList);
+tierListRoutes.delete('/:id', tierListController.deleteTierList);
 
 tierListRoutes.get('/:id', tierListController.getTierList);
 

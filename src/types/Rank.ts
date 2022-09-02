@@ -5,4 +5,5 @@ export default interface Rank {
   title: string;
   description: string;
   products: Product[];
+  productOrder: number[];
 }

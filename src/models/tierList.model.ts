@@ -2,29 +2,30 @@ import supabase from '../db';
 import Product from '../types/Product';
 import { definitions } from '../types/supabase';
 import TierList from '../types/TierList';
+import { productQuery } from './product.model';
+
+const tierListQuery = `
+  id,
+  title,
+  description,
+  rankOrder: rank_order,
+  rank(
+    id,
+    title,
+    description,
+    productOrder: product_order,
+    product(${productQuery})
+  ),
+  product(${productQuery})
+`;
 
 export const getTierList = async (id: string) => {
   const response = await supabase
-    .from('tier_list_product')
-    .select(
-      `
-      tier_list (
-        title
-        description
-        rank_order
-        rank (
-          title
-          description
-          product_order
-        )
-        product (*)
-      )
-    `
-    )
-    .order('array_position(rank_order, rank.id)')
-    .order('array_position(product_order, product.id)', {
-      foreignTable: 'rank',
-    });
+    .from('tier_list')
+    .select(tierListQuery)
+    .eq('id', id)
+    .limit(1)
+    .single();
 
   return response.data;
 };
@@ -35,7 +36,7 @@ export const addTierList = async (
   const response = await supabase
     .from<definitions['tier_list']>('tier_list')
     .insert(tierList)
-    .limit(1)
+    .select(tierListQuery)
     .single();
 
   return response.data;
@@ -44,9 +45,7 @@ export const deleteTierList = async (id: string) => {
   const response = await supabase
     .from<definitions['tier_list']>('tier_list')
     .delete()
-    .match({ id })
-    .limit(1)
-    .single();
+    .eq('id', id);
 
   return response.data;
 };
@@ -59,7 +58,7 @@ export const updateTierList = async (
     .from<definitions['tier_list']>('tier_list')
     .update(tierList)
     .match({ id })
-    .limit(1)
+    .select(tierListQuery)
     .single();
 
   return response.data;

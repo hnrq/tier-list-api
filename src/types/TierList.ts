@@ -7,4 +7,5 @@ export default interface TierList {
   description?: string;
   tiers: Rank[];
   unranked: Product[];
+  rankOrder: number[];
 }

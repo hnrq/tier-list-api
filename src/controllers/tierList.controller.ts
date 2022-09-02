@@ -6,7 +6,8 @@ export const getTierList = async (
   res: Response
 ) => {
   try {
-    return tierListService.getTierList(req.params.id);
+    const response = await tierListService.getTierList(req.params.id);
+    res.status(200).json(response);
   } catch (error) {
     console.error(error);
     res.status(400).send({ error });
@@ -18,7 +19,24 @@ export const addTierList = async (
   res: Response
 ) => {
   try {
-    return tierListService.addTierList(req.body);
+    const response = await tierListService.addTierList(req.body);
+    res.status(200).json(response);
+  } catch (error) {
+    console.error(error);
+    res.status(400).send({ error });
+  }
+};
+
+export const updateTierList = async (
+  req: Request<{ id: string }, any, { title: string; description?: string }>,
+  res: Response
+) => {
+  try {
+    const response = await tierListService.updateTierList(
+      req.params.id,
+      req.body
+    );
+    res.status(200).json(response);
   } catch (error) {
     console.error(error);
     res.status(400).send({ error });
@@ -30,7 +48,8 @@ export const deleteTierList = async (
   res: Response
 ) => {
   try {
-    return tierListService.deleteTierList(req.params.id);
+    const response = await tierListService.deleteTierList(req.params.id);
+    res.status(200).json(response);
   } catch (error) {
     console.error(error);
     res.status(400).send({ error });
